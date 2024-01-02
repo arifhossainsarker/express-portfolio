@@ -3,11 +3,12 @@ const mongoose = require("mongoose");
 const router = express.Router();
 const skillSchema = require("../schemas/skillSchema");
 const Skill = new mongoose.model("Skill", skillSchema);
+const checkLogin = require('../middlewares/checkLogin');
 
 
 
 // get all Skill router
-router.get('/', async(req, res) => {
+router.get('/', checkLogin, async(req, res) => {
     try{
         const data = await Skill.find({status: 'active'})
             .select({
@@ -24,7 +25,7 @@ router.get('/', async(req, res) => {
 });
 
 // get by id router
-router.get('/:id', async(req, res) => {
+router.get('/:id', checkLogin, async(req, res) => {
     try{
         const data = await Skill.find({_id: req.params.id});
         res.status(200).json({
@@ -37,7 +38,7 @@ router.get('/:id', async(req, res) => {
 });
 
 // post skill router
-router.post('/', async(req, res) => {
+router.post('/', checkLogin, async(req, res) => {
     const newSkill = new Skill(req.body);
     try{
        await newSkill.save();
@@ -50,7 +51,7 @@ router.post('/', async(req, res) => {
 });
 
 // update skill router
-router.put('/:id', async(req, res) => {
+router.put('/:id', checkLogin, async(req, res) => {
     try{
         await Skill.updateOne({_id: req.params.id}, {
             $set: {
@@ -67,7 +68,7 @@ router.put('/:id', async(req, res) => {
 });
 
 // Delete Skill router
-router.delete('/:id', async(req, res) => {
+router.delete('/:id', checkLogin, async(req, res) => {
     try{
         await Skill.deleteOne({_id: req.params.id});
         res.status(200).json({

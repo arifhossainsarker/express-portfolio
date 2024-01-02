@@ -3,11 +3,12 @@ const mongoose = require("mongoose");
 const router = express.Router();
 const projectSchema = require("../schemas/projectSchema");
 const Project = new mongoose.model("Project", projectSchema);
+const checkLogin = require('../middlewares/checkLogin');
 
 
 
 // get all Skill router
-router.get('/', async(req, res) => {
+router.get('/', checkLogin, async(req, res) => {
     try{
         const data = await Project.find({status: 'active'})
             .select({
@@ -24,7 +25,7 @@ router.get('/', async(req, res) => {
 });
 
 // get by id router
-router.get('/:id', async(req, res) => {
+router.get('/:id', checkLogin, async(req, res) => {
     try{
         const data = await Project.find({_id: req.params.id});
         res.status(200).json({
@@ -37,7 +38,7 @@ router.get('/:id', async(req, res) => {
 });
 
 // post Project router
-router.post('/', async(req, res) => {
+router.post('/', checkLogin, async(req, res) => {
     const newProject = new Project(req.body);
     try{
        await newProject.save();
@@ -50,7 +51,7 @@ router.post('/', async(req, res) => {
 });
 
 // update Project router
-router.put('/:id', async(req, res) => {
+router.put('/:id', checkLogin, async(req, res) => {
     try{
         await Project.updateOne({_id: req.params.id}, {
             $set: {
@@ -68,7 +69,7 @@ router.put('/:id', async(req, res) => {
 });
 
 // Delete Project router
-router.delete('/:id', async(req, res) => {
+router.delete('/:id', checkLogin, async(req, res) => {
     try{
         await Project.deleteOne({_id: req.params.id});
         res.status(200).json({
