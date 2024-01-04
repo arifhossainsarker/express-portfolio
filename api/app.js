@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+var cors = require('cors');
 const skillHandler = require("./routeHandler/skillHandler");
 const projectHandler = require("./routeHandler/projectHandler");
 const userHandler = require("./routeHandler/userHandler");
@@ -23,7 +24,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/projects')
     }).catch((err) => {
         console.log(err);
     })
-
+// application cors
+app.use(cors());
 // application router
 app.use('/api/skill', skillHandler);
 app.use('/api/project', projectHandler);
