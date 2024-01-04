@@ -4,6 +4,8 @@ const dotenv = require("dotenv");
 const skillHandler = require("./routeHandler/skillHandler");
 const projectHandler = require("./routeHandler/projectHandler");
 const userHandler = require("./routeHandler/userHandler");
+const frontendSkillHandler = require("./routeHandler/frontendSkillHandler");
+const frontendProjectHandler = require("./routeHandler/frontendProjectHandler");
 
 
 
@@ -26,7 +28,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/projects')
 app.use('/api/skill', skillHandler);
 app.use('/api/project', projectHandler);
 app.use('/api/user', userHandler);
-
+// frontend router
+app.use('/frontend/skill', frontendSkillHandler);
+app.use('/frontend/project', frontendProjectHandler);
 // function error handler
 const errorHandler = (err, req, res, next) => {
     if (res.headersSent) {
