@@ -18,6 +18,26 @@ const router = createRouter({
       path: '/project',
       name: 'project',
       component: () => import('../views/ProjectView.vue')
+    },
+    {
+      path: '/admin/login',
+      name: 'login',
+      component: () => import('../views/backend/LoginView.vue')
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: () => import('../views/backend/DashboardView.vue')
+    },
+    {
+      path: '/dashboard/skill',
+      name: 'backend-skill',
+      component: () => import('../views/backend/SkillView.vue')
+    },
+    {
+      path: '/dashboard/project',
+      name: 'backend-project',
+      component: () => import('../views/backend/ProjectView.vue')
     }
   ]
 })
