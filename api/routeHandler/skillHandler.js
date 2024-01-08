@@ -8,11 +8,10 @@ const checkLogin = require('../middlewares/checkLogin');
 
 
 // get all Skill router
-router.get('/', checkLogin, async(req, res) => {
+router.get('/',  async(req, res) => {
     try{
         const data = await Skill.find({status: 'active'})
             .select({
-                _id:0,
                 date: 0,
             });
         res.status(200).json({
@@ -25,7 +24,7 @@ router.get('/', checkLogin, async(req, res) => {
 });
 
 // get by id router
-router.get('/:id', checkLogin, async(req, res) => {
+router.get('/:id',  async(req, res) => {
     try{
         const data = await Skill.find({_id: req.params.id});
         res.status(200).json({
@@ -38,7 +37,7 @@ router.get('/:id', checkLogin, async(req, res) => {
 });
 
 // post skill router
-router.post('/', checkLogin, async(req, res) => {
+router.post('/',  async(req, res) => {
     const newSkill = new Skill(req.body);
     try{
        await newSkill.save();
@@ -51,7 +50,7 @@ router.post('/', checkLogin, async(req, res) => {
 });
 
 // update skill router
-router.put('/:id', checkLogin, async(req, res) => {
+router.put('/:id',  async(req, res) => {
     try{
         await Skill.updateOne({_id: req.params.id}, {
             $set: {
@@ -68,7 +67,7 @@ router.put('/:id', checkLogin, async(req, res) => {
 });
 
 // Delete Skill router
-router.delete('/:id', checkLogin, async(req, res) => {
+router.delete('/:id', async(req, res) => {
     try{
         await Skill.deleteOne({_id: req.params.id});
         res.status(200).json({

@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+  website:
+    build: ./website
+    container_name: client-website
+    ports:
+      - "5173:5173"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - api
+    networks:
+      - mern-network
+
+  api:
+    build: ./api
+    container_name: backend-api
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+    networks:
+      - mern-network
+
+  database:
+    image: mongo
+    container_name: mongo-db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodata:/data/db
+    networks:
+      - mern-network
+
+networks:
+  mern-network:
+    driver: bridge
+
+volumes:
+    mongodata:
+    
