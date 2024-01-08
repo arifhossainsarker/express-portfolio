@@ -40,10 +40,20 @@ const router = createRouter({
       component: () => import('../views/backend/SkillView.vue')
     },
     {
+      path: '/dashboard/add/skill',
+      name: 'backend-ad-skill',
+      component: () => import('../views/backend/AddSkill.vue')
+    },
+    {
       path: '/dashboard/project',
       name: 'backend-project',
       component: () => import('../views/backend/ProjectView.vue')
-    }
+    },
+    {
+      path: '/dashboard/add/project',
+      name: 'backend-ad-skill',
+      component: () => import('../views/backend/AddProject.vue')
+    },
   ]
 });
 
