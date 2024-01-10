@@ -45,14 +45,24 @@ const router = createRouter({
       component: () => import('../views/backend/AddSkill.vue')
     },
     {
+      path: '/dashboard/edit/skill/:id',
+      name: 'backend-edit-skill',
+      component: () => import('../views/backend/EditSkill.vue')
+    },
+    {
       path: '/dashboard/project',
       name: 'backend-project',
       component: () => import('../views/backend/ProjectView.vue')
     },
     {
       path: '/dashboard/add/project',
-      name: 'backend-ad-skill',
+      name: 'backend-ad-project',
       component: () => import('../views/backend/AddProject.vue')
+    },
+    {
+      path: '/dashboard/edit/project/:id',
+      name: 'backend-edit-project',
+      component: () => import('../views/backend/EditProject.vue')
     },
   ]
 });
